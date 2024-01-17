@@ -15,4 +15,14 @@ class ProjectController extends Controller
             'results' => $projects
         ]);
     }
+
+    public function show($slug) {
+        $project = Project::where('slug', $slug)->first();
+
+        if (!$project) {
+            return response()->json(['error' => 'Project not found!'], 404);
+        }
+
+        return response()->json($project);
+    }
 }
